@@ -11,3 +11,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+header {
+  font-family: "Black Ops One";
+  font-variant: small-caps; 
+  font-weight: lighter;
+  letter-spacing: 0.3rem;
+}
