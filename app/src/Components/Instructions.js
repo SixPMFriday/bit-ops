@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {SetLayout} from './LayoutController'
 
 // Instructions Pop-Up
 // Opens / closes when user clicks instructions button
@@ -37,13 +38,15 @@ export class InstructionsButton extends React.Component {
         //{
             if (document.getElementById("Instructions").toggleAttribute("visible")) {
                 document.getElementById("Layout").setAttribute("layout", "instructionsVisible")
-                document.getElementById("Instructions").setAttribute("layout", "instructionsVisible")
+                document.getElementById("Header").setAttribute("layout", "instructionsVisible")
                 document.getElementById("Game").setAttribute("layout", "instructionsVisible")
+                document.getElementById("Instructions").setAttribute("layout", "instructionsVisible")
             }
             else {
                 document.getElementById("Layout").setAttribute("layout", "default")
-                document.getElementById("Instructions").setAttribute("layout", "default")
+                document.getElementById("Header").setAttribute("layout", "default")
                 document.getElementById("Game").setAttribute("layout", "default")
+                document.getElementById("Instructions").setAttribute("layout", "default")
             }
     };
 

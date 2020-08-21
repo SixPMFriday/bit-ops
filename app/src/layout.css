@@ -48,7 +48,7 @@
     ".. ii ii ii ii ii ii ii .."
     ".. ii ii ii ii ii ii ii ..";
 }
-#Header[layout="default"] { 
+#Header[layout="instructionsVisible"] { 
   grid-area: hh; 
   display: block;
 }
@@ -60,5 +60,3 @@
   grid-area: gg; 
   display: none;
 }
-
-
