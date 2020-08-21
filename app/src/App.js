@@ -3,13 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 
 
+/*
+  app state:
+    - base (bit)      -- original value of base array
+    - current (bit)   -- current value of base array
+    - target (bit)    -- value of target array
+    - match (bool)    -- do current and target array match?
+    - operations (stack)  -- history of operations performed to transform base into current
+*/
+
 function Bit() {
   return (
     <>
-      <span class="dot"></span>
+      <span className="bit"></span>
     </>
   )
 }
+
 function BitOpsButtons() {
   return(
     <>
@@ -23,17 +33,17 @@ function BitOpsButtons() {
     </div>
     </>
   )
-
 }
-function BitArray_8() {
-  const bit_items = Array.from({length: 8}, i => 0) 
+
+function BitArray_8(props) {
+  const bit_items = Array.from(props.byteValue); 
   return (
     <>
       <div class="bit-window">
           {bit_items.map(item => {
             return(
               <div class="bit-item" key = {item.id}>
-                <Bit/>
+                <Bit />
               </div>
             )
           })}
@@ -41,14 +51,7 @@ function BitArray_8() {
     </>
   )
 }
-/*
-  app state:
-    - base (bit)      -- original value of base array
-    - current (bit)   -- current value of base array
-    - target (bit)    -- value of target array
-    - match (bool)    -- do current and target array match?
-    - operations (stack)  -- history of operations performed to transform base into current
-*/
+
 function UserArray() {
   return(
     <>
@@ -59,6 +62,7 @@ function UserArray() {
     </>
   )
 }
+
 function TargetArray() {
   return(
     <>
@@ -67,6 +71,10 @@ function TargetArray() {
     </>
   )
 }
+
+
+
+
 function App() {
   return (
     <div className="App">
