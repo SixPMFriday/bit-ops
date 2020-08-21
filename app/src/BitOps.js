@@ -1,3 +1,11 @@
+/*  Javascript functions for converting to/from bit
+    Add functions to applying bit logic
+
+    IntToByte
+    IntToByteArray
+    ByteToInt
+*/
+
 
 // Returns 8-character string representing param num (int between 0 and 255) as byte
 export function IntToByte(num) {

@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './App.css';
-import { IntToByte, IntToByteArray, ByteToInt } from './BitOps';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider, useSelector, useDispatch } from 'react-redux';
+import { configureStore, createSlice, createAction, createReducer } from '@reduxjs/toolkit';
+
+import { IntToByte, IntToByteArray, ByteToInt } from './BitOps';
+import { GameInstructions } from './Components/GameInstructions';
 
 /*
   Objects in global store:
@@ -31,7 +34,6 @@ import { Provider, useSelector, useDispatch } from 'react-redux';
     - operations (stack)  -- history of operations performed to transform base into current
 */
 
-import { configureStore, createSlice, createAction, createReducer } from '@reduxjs/toolkit';
 
 
 /*  createSlice function  allows us to provide an object with the reducer functions, and it will automatically generate 
@@ -49,19 +51,17 @@ const counterSlice = createSlice({
     decrement: state => { state.value -= 1}
   }
 })
-// Store
 
+
+// Store
 const store = configureStore({
   reducer: counterSlice.reducer
 });
 
-/* Use ES6 destructuring syntax to pull out the action creator functions and reducer as variables */
 
+/* Use ES6 destructuring syntax to pull out the action creator functions and reducer as variables */
 const { actions, reducer } = counterSlice
 const { increment, decrement } = actions
-
-
-
 // SELECTORS
 const selectCurrentValue = state => state.Value;
 
@@ -69,7 +69,17 @@ const selectCurrentValue = state => state.Value;
 // Content Components
 
 
-// Accepts prop value and renders array
+function Header() {
+  return (
+    <>
+    <div className = 'header'>
+      <h1>Bit Ops</h1>
+      <GameInstructions/>
+    </div>
+    </>
+  )
+}
+
 function ByteArray_Current() {
   // useState returns a tuple where the first param is the current state
   // and the second is a method which allows us to update the counters state
@@ -98,42 +108,70 @@ function ByteArray_Current() {
   )
 }
 
-
-
-function ContentStylingLayout() {
-  // applies naming reference for css
-  // names are used for content and layout
+function GameOperations() {
   return (
     <>
-    <div className="App">
-      <header className="App-header">
-        <h1>Bit Ops</h1>
-      </header>
-      <main className="App-content">
-        <p>Your Array:</p>
-        <ByteArray_Current/>
-        <p>Target:</p>
-        <ByteArray_Current/>
-          <div id="user-controller">
-            <p>Operations:</p>
-            <div id="formula-controller">
-              <button id="formula-button-and">AND (&)</button>
-              <button id="formula-button-or">OR (|)</button>
-              <button id="formula-button-xor">XOR (^)</button>
-              <button id="formula-button-not">NOT (~)</button>
-              <button id="formula-button-ls">LEFT SHIFT ({'<<'})</button>
-              <button id="formula-button-rs">RIGHT SHIFT ({'>>'})</button>
-            </div>
-            <div id="byte-controller">
-              <button id="byte-button-rs">Run</button>
-            </div>
-            <div id="history-controller">
-              <button id="history-button-undo">Undo</button>
-              <button id="history-button-redo">Redo</button>
-            </div>
-          </div>
-        </main>
+      <div id="user-controller">
+        <p>Operations:</p>
+        <div id="formula-controller">
+          <button id="formula-button-and">AND (&)</button>
+          <button id="formula-button-or">OR (|)</button>
+          <button id="formula-button-xor">XOR (^)</button>
+          <button id="formula-button-not">NOT (~)</button>
+          <button id="formula-button-ls">LEFT SHIFT ({'<<'})</button>
+          <button id="formula-button-rs">RIGHT SHIFT ({'>>'})</button>
+        </div>
+        <div id="byte-controller">
+          <button id="byte-button-rs">Run</button>
+        </div>
+        <div id="history-controller">
+          <button id="history-button-undo">Undo</button>
+          <button id="history-button-redo">Redo</button>
+        </div>
       </div>
+    </>
+  )
+}
+
+function GameOperationsHistory() {
+  return (
+    <>
+      <div className="history">
+        <h2>History</h2>
+        <ol>
+          <li>left shift 2</li>
+          <li>xor 68</li>
+          <li>and 200</li>
+        </ol>
+      </div>
+    </>
+  )
+}
+
+function ContentLayout() {
+  // Add all page content to div element
+  // App contains grid, each content will have alias
+  return (
+    <>
+    <div className="App grid-main">
+      <div className="grid-header">      
+        <Header/>
+      </div>
+      <div className="grid-current-value">  
+        <p>Current Value:</p>
+        <ByteArray_Current/>
+      </div>
+      <div className="grid-target-value">  
+        <p>Target Value:</p>
+        <ByteArray_Current/>
+      </div>
+      <div className="grid-operations">
+        <GameOperations/>
+      </div>
+      <div className="grid-operations-history">
+        <GameOperationsHistory/>
+      </div>
+    </div>
     </>
   )
 }
@@ -143,7 +181,7 @@ function ContentStylingLayout() {
 function App() {
   return (
     <Provider store={store}>
-      <ContentStylingLayout/>
+      <ContentLayout/>
     </Provider>
   );
 }
