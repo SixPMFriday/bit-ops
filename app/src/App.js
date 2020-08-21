@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import { Instructions, InstructionsButton } from './Components/Instructions';
+import { Game } from './Components/Game';
 
 /*
   app state:
@@ -11,83 +10,32 @@ import './App.css';
     - match (bool)    -- do current and target array match?
     - operations (stack)  -- history of operations performed to transform base into current
 */
-
-function Bit() {
+function Header() {
   return (
     <>
-      <span className="bit"></span>
-    </>
-  )
-}
-
-function BitOpsButtons() {
-  return(
-    <>
-    <div class="bit-operations-controller">
-      <button>AND (&)</button>
-      <button>OR (|)</button>
-      <button>XOR (^)</button>
-      <button>NOT (~)</button>
-      <button>LEFT SHIFT ({'<<'})</button>
-      <button>RIGHT SHIFT ({'>>'})</button>
+    <div className = 'header'>
+      <h1>Bit Ops</h1>
+      <InstructionsButton/>
     </div>
     </>
   )
 }
 
-function BitArray_8(props) {
-  const bit_items = Array.from(props.byteValue); 
+
+export function App() {
   return (
     <>
-      <div class="bit-window">
-          {bit_items.map(item => {
-            return(
-              <div class="bit-item" key = {item.id}>
-                <Bit />
-              </div>
-            )
-          })}
+    <div id="Layout" className="App" layout="default">
+      <div id="Header" layout="default">      
+        <Header/>
       </div>
-    </>
-  )
-}
-
-function UserArray() {
-  return(
-    <>
-      <p>Your Array</p>
-      <BitArray_8/>
-      <button>Undo</button>
-      <button>Redo</button>
-    </>
-  )
-}
-
-function TargetArray() {
-  return(
-    <>
-      <p>Target Array</p>
-      <BitArray_8/>
-    </>
-  )
-}
-
-
-
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Bit Ops</h1>
-      <main>
-        <UserArray/>
-        <BitOpsButtons/>
-        <TargetArray/>
-      </main>
-      </header>
+      <div id="Instructions" layout="default">      
+        <Instructions/>
+      </div>
+      <div id="Game" layout="default">
+        <Game/>
+      </div>
     </div>
-  );
+    </>
+  )
 }
-
-export default App;

@@ -7,6 +7,7 @@
 */
 
 
+
 // Returns 8-character string representing param num (int between 0 and 255) as byte
 export function IntToByte(num) {
     if (num < 0 || num > 255) {
