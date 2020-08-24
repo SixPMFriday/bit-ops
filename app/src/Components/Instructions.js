@@ -34,20 +34,12 @@ export class InstructionsButton extends React.Component {
 
     // Close content window if open, open content window if closed
     handleButtonClick = () => {
-        //if (document.getElementById("instructions").getAttribute("className").valueOf() == "hidden") 
-        //{
-            if (document.getElementById("Instructions").toggleAttribute("visible")) {
-                document.getElementById("Layout").setAttribute("layout", "instructionsVisible")
-                document.getElementById("Header").setAttribute("layout", "instructionsVisible")
-                document.getElementById("Game").setAttribute("layout", "instructionsVisible")
-                document.getElementById("Instructions").setAttribute("layout", "instructionsVisible")
-            }
-            else {
-                document.getElementById("Layout").setAttribute("layout", "default")
-                document.getElementById("Header").setAttribute("layout", "default")
-                document.getElementById("Game").setAttribute("layout", "default")
-                document.getElementById("Instructions").setAttribute("layout", "default")
-            }
+        if (document.getElementById("Instructions").toggleAttribute("visible")) {
+            SetLayout("instructionsVisible")
+        }
+        else {
+            SetLayout("default")
+        }
     };
 
     // Render button and content window
